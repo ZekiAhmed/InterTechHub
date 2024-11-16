@@ -14,9 +14,9 @@ What things you need to install the software
 
 ## Installing
 
-A step by step series of examples that tell you how to get a development env running
+A step by step guide that tell you how to get a development env running
 
-- Clone this repository (https://github.com/ZekiAhmed/InterTechHub.git) or download the zipfile.
+- Clone this repository (https://github.com/ZekiAhmed/InterTechHub.git) or download the zipfile (https://github.com/ZekiAhmed/InterTechHub/archive/refs/heads/main.zip).
 
 - Run 'npm install' to install all dependencies
 
