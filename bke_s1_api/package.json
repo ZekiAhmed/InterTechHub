@@ -1,0 +1,13 @@
+{
+  "name": "bke_s1_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": ""
+  },
+  "keywords": [],
+  "author": "Zeki Ahmed",
+  "license": "ISC",
+  "description": ""
+}
