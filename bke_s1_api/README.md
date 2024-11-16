@@ -1,15 +1,19 @@
-Project Title
+# Project Title
+
 This api is stage-1 project. The api has three routes /name, /hobby and /dream. Each one of them gives you a response.
 
-Getting Started
+# Getting Started
+
 These instructions will get you a copy of the project up and running on your local machine for development.
 
-Prerequisites
+## Prerequisites
+
 What things you need to install the software
 
 - install postman (https://www.postman.com/downloads/)
 
-Installing
+## Installing
+
 A step by step series of examples that tell you how to get a development env running
 
 - Clone this repository (https://github.com/ZekiAhmed/InterTechHub.git) or download the zipfile.
