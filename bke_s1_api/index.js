@@ -4,6 +4,9 @@ const app = express();
 
 const hobby = ["Reading book", "Walking", "Riding horse"];
 
+app.get("/", (req, res) => {
+  res.status(200).send("Use one of this routes /name, /hobby or /dream");
+});
 app.get("/name", (req, res) => {
   res.status(200).send("Zeki Ahmed");
 });
