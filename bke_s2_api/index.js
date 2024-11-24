@@ -26,7 +26,7 @@ app.get("api/books/guide", (req, res) => {
     message4: `localhost:3000/api/books/find/67428ae1402ec7a16d62eb5a --- TO FIND A BOOK -- WORKS ON WEB`,
     message5: `localhost:3000/api/books/recommendation --- GIVES YOU 2 RECOMMENDED BOOKS -- WORKS ON WEB`,
     message6: `localhost:3000/api/books/favorite/67428afb402ec7a16d62eb5c --- MAKE A BOOK FAVORITE -- WORKS ON WEB`,
-    messageTwo: `localhost:3000/api/books/ ------ TO SAVE BOOK -- WORKS ONLY ON POSTMAN`,
+    message7: `localhost:3000/api/books/ ------ TO SAVE BOOK -- WORKS ONLY ON POSTMAN`,
   });
 });
 
