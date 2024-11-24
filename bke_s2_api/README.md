@@ -33,7 +33,7 @@ A step by step guide that tell you how to get a development env running
 ## How To Use The Api
 
 - localhost:3000/api/books/ ------ TO SAVE BOOK -- WORKS ONLY ON POSTMAN
-- localhost:3000/api/books/67428b3b402ec7a16d62eb65 --- TO UPDATE BOOK -- WORKS ON WEB
+- localhost:3000/api/books/67428b3b402ec7a16d62eb65 --- TO UPDATE BOOK -- WORKS ONLY ON POSTMAN
 - localhost:3000/api/books/67428b3b402ec7a16d62eb65 --- TO DELETE BOOK -- WORKS ON WEB
 - localhost:3000/api/books/find/67428ae1402ec7a16d62eb5a --- TO FIND A BOOK -- WORKS ON WEB
 - localhost:3000/api/books/ --- TO FIND ALL BOOKS -- WORKS ON WEB
