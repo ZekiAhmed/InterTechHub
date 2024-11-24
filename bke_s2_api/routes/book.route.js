@@ -58,4 +58,21 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// GET BOOK
+router.get("/find/:id", async (req, res) => {
+  try {
+    const book = await bookModel.findById(req.params.id);
+
+    res.status(200).json({
+      status: "success",
+      data: { book },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
+
 export default router;
