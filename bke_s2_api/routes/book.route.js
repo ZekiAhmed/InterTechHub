@@ -41,4 +41,21 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// DELETE BOOK
+router.delete("/:id", async (req, res) => {
+  try {
+    await bookModel.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      status: "success",
+      message: "Book has been deleted...",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
+
 export default router;
