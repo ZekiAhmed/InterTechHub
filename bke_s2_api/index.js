@@ -17,7 +17,7 @@ mongoose
 
 // Routes
 app.use("/api/books", bookRoute);
-app.use("/api/books/guide", (req, res) => {
+app.use("/", (req, res) => {
   res.status(200).json({
     status: "success",
     message1: `localhost:3000/api/books/ --- TO GET ALL BOOKS -- WORKS ON WEB.`,
