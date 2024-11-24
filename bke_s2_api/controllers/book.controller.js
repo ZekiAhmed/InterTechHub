@@ -91,7 +91,7 @@ export const findAllBook = async (req, res) => {
 // GET SOME BOOK RECOMMENDATION
 export const bookRecommendation = async (req, res) => {
   try {
-    const books = await bookModel.aggregate([{ $sample: { size: 1 } }]);
+    const books = await bookModel.aggregate([{ $sample: { size: 2 } }]);
 
     res.status(200).json({
       status: "success",
