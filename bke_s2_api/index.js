@@ -33,7 +33,7 @@ app.get("api/books/guide", (req, res) => {
 app.all("*", (req, res, next) => {
   res.status(404).json({
     status: "fail",
-    message: `Can't find ${req.originalUrl} on the server!!. Try this route '/api/books/guide' it will give you all books in the database.`,
+    message: `Can't find ${req.originalUrl} on the server!!. Try this route '/api/books/guide'.`,
   });
 });
 
