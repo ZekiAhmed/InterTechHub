@@ -140,3 +140,16 @@ export const favoriteBook = async (req, res) => {
     });
   }
 };
+
+export const apiUsageGuide = (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message1: `/api/books/ --- TO GET ALL BOOKS -- WORKS ON WEB.`,
+    message2: `/api/books/67428b3b402ec7a16d62eb65 --- TO UPDATE BOOK -- WORKS ONLY ON POSTMAN`,
+    message3: `/api/books/67428b3b402ec7a16d62eb65 --- TO DELETE BOOK -- WORKS ON WEB`,
+    message4: `/api/books/find/67428ae1402ec7a16d62eb5a --- TO FIND A BOOK -- WORKS ON WEB`,
+    message5: `/api/books/recommendation --- GIVES YOU 2 RECOMMENDED BOOKS -- WORKS ON WEB`,
+    message6: `/api/books/favorite/67428afb402ec7a16d62eb5c --- MAKE A BOOK FAVORITE -- WORKS ON WEB`,
+    message7: `/api/books/ ------ TO SAVE BOOK -- WORKS ONLY ON POSTMAN`,
+  });
+};

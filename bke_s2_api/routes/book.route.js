@@ -1,6 +1,7 @@
 import express from "express";
 import bookModel from "../models/book.model.js";
 import {
+  apiUsageGuide,
   bookRecommendation,
   deleteBook,
   favoriteBook,
@@ -32,5 +33,8 @@ router.get("/recommendation", bookRecommendation);
 
 // ADD BOOK AS FAVORITE
 router.post("/favorite/:id", favoriteBook);
+
+// API USAGE GUIDE
+router.get("/guide", apiUsageGuide);
 
 export default router;
