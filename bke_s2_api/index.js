@@ -18,6 +18,13 @@ mongoose
 // Routes
 app.use("/api/books", bookRoute);
 
+app.all("*", (req, res, next) => {
+  res.status(404).json({
+    status: "fail",
+    message: `Can't find ${req.originalUrl} on the server!!`,
+  });
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Backend Server is runing`);
 });

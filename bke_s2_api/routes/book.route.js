@@ -1,147 +1,36 @@
 import express from "express";
 import bookModel from "../models/book.model.js";
+import {
+  bookRecommendation,
+  deleteBook,
+  favoriteBook,
+  findAllBook,
+  findBook,
+  saveBook,
+  updateBook,
+} from "../controllers/book.controller.js";
 
 const router = express.Router();
 
 // CREATE BOOK
-router.post("/", async (req, res) => {
-  const newBook = new bookModel(req.body);
-  try {
-    const savedBook = await newBook.save();
-    res.status(201).json({
-      status: "success",
-      data: { savedBook },
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+router.post("/", saveBook);
 
 // UPDATE BOOK
-router.put("/:id", async (req, res) => {
-  try {
-    const updatedBook = await bookModel.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
-
-    res.status(200).json({
-      status: "success",
-      data: { updatedBook },
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+router.put("/:id", updateBook);
 
 // DELETE BOOK
-router.delete("/:id", async (req, res) => {
-  try {
-    await bookModel.findByIdAndDelete(req.params.id);
-
-    res.status(200).json({
-      status: "success",
-      message: "Book has been deleted...",
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+router.delete("/:id", deleteBook);
 
 // GET BOOK
-router.get("/find/:id", async (req, res) => {
-  try {
-    const book = await bookModel.findById(req.params.id);
-
-    res.status(200).json({
-      status: "success",
-      data: { book },
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+router.get("/find/:id", findBook);
 
 // GET ALL BOOKS
-router.get("/", async (req, res) => {
-  try {
-    const books = await bookModel.find();
-    res.status(200).json({
-      status: "success",
-      data: { books },
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+router.get("/", findAllBook);
 
 // GET SOME BOOK RECOMMENDATION
-router.get("/recommendation", async (req, res) => {
-  try {
-    const books = await bookModel.aggregate([{ $sample: { size: 1 } }]);
-
-    res.status(200).json({
-      status: "success",
-      data: { books },
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+router.get("/recommendation", bookRecommendation);
 
 // ADD BOOK AS FAVORITE
-router.post("/favorite/:id", async (req, res) => {
-  try {
-    const favBook = await bookModel
-      .findById(req.params.id)
-      .where({ favorite: true });
-    if (favBook) {
-      const favBookFalse = await bookModel.findByIdAndUpdate(
-        req.params.id,
-        { favorite: false },
-        { new: true }
-      );
-      res.status(200).json({
-        status: "success",
-        data: { favBookFalse },
-      });
-    } else {
-      const favBookTrue = await bookModel.findByIdAndUpdate(
-        req.params.id,
-        { favorite: true },
-        { new: true }
-      );
-
-      res.status(200).json({
-        status: "success",
-        data: { favBookTrue },
-      });
-    }
-  } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+router.post("/favorite/:id", favoriteBook);
 
 export default router;
