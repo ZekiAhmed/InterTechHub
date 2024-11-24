@@ -91,4 +91,21 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET SOME BOOK RECOMMENDATION
+router.get("/recommendation", async (req, res) => {
+  try {
+    const books = await bookModel.aggregate([{ $sample: { size: 1 } }]);
+
+    res.status(200).json({
+      status: "success",
+      data: { books },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
+
 export default router;
