@@ -108,4 +108,40 @@ router.get("/recommendation", async (req, res) => {
   }
 });
 
+// ADD BOOK AS FAVORITE
+router.post("/favorite/:id", async (req, res) => {
+  try {
+    const favBook = await bookModel
+      .findById(req.params.id)
+      .where({ favorite: true });
+    if (favBook) {
+      const favBookFalse = await bookModel.findByIdAndUpdate(
+        req.params.id,
+        { favorite: false },
+        { new: true }
+      );
+      res.status(200).json({
+        status: "success",
+        data: { favBookFalse },
+      });
+    } else {
+      const favBookTrue = await bookModel.findByIdAndUpdate(
+        req.params.id,
+        { favorite: true },
+        { new: true }
+      );
+
+      res.status(200).json({
+        status: "success",
+        data: { favBookTrue },
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
+
 export default router;
