@@ -20,4 +20,25 @@ router.post("/", async (req, res) => {
   }
 });
 
+// UPDATE BOOK
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedBook = await bookModel.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+
+    res.status(200).json({
+      status: "success",
+      data: { updatedBook },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
+
 export default router;
