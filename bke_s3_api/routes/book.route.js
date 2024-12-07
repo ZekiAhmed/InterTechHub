@@ -13,7 +13,7 @@ import { verifyToken, verifyTokenAndAdmin } from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
-// CREATE BOOK
+// CREATE BOOKS
 router.post("/", verifyToken, saveBook);
 
 // UPDATE BOOK
