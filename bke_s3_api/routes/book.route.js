@@ -9,29 +9,30 @@ import {
   saveBook,
   updateBook,
 } from "../controllers/book.controller.js";
+import { verifyToken, verifyTokenAndAdmin } from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
 // CREATE BOOK
-router.post("/", saveBook);
+router.post("/", verifyToken, saveBook);
 
 // UPDATE BOOK
-router.put("/:id", updateBook);
+router.put("/:id", verifyToken, updateBook);
 
 // DELETE BOOK
-router.delete("/:id", deleteBook);
+router.delete("/:id", verifyToken, deleteBook);
 
 // GET BOOK
-router.get("/", findBook);
+router.get("/", verifyToken, findBook);
 
 // GET ALL BOOKS
-router.get("/all", findAllBook);
+router.get("/all", verifyTokenAndAdmin, findAllBook);
 
 // GET SOME BOOK RECOMMENDATION
-router.get("/recommendation", bookRecommendation);
+router.get("/recommendation", verifyToken, bookRecommendation);
 
 // ADD BOOK AS FAVORITE
-router.get("/favorite/:id", favoriteBook);
+router.get("/favorite/:id", verifyToken, favoriteBook);
 
 // API USAGE GUIDE
 router.get("/guide", apiUsageGuide);
