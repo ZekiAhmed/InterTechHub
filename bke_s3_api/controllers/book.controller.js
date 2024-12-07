@@ -256,5 +256,8 @@ export const apiUsageGuide = (req, res) => {
       ROUTE_METHOD: "POST",
       USAGE: "All users can create a book which they are the owner of it",
     },
+    message10: {
+      AdminPassword: { username: "code", password: "code" },
+    },
   });
 };
