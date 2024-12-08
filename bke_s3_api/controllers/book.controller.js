@@ -3,7 +3,6 @@ import userModel from "../models/user.model.js";
 
 // SAVE BOOK
 export const saveBook = async (req, res) => {
-  // const newBook = new bookModel(req.body);
   const newBook = new bookModel({
     title: req.body.title,
     author: req.body.author,
@@ -48,9 +47,6 @@ export const updateBook = async (req, res) => {
         message: "This book is not yours.So You can't update it!!",
       });
     }
-    // const updatedBook = await bookModel
-    //   .findById(req.params.id)
-    //   .where({ user: req.user.id });
   } catch (err) {
     res.status(500).json({
       status: "fail",
@@ -93,17 +89,9 @@ export const deleteBook = async (req, res) => {
 export const findBook = async (req, res) => {
   const qFavorite = req.query.favorite;
   try {
-    // const book = await bookModel.findById(req.params.id);
-
-    // const book = await bookModel.findOne({
-    //   _id: req.params.id,
-    //   owner: req.user.id,
-    // });
-
     let books;
 
     if (qFavorite) {
-      // products = await productModel.find().sort({ createdAt: -1 }).limit(1);
       const favUser = await userModel.findById(req.user.id);
       const bookFav = await bookModel.findById(qFavorite);
       books = await userModel.aggregate([
