@@ -34,14 +34,23 @@ export const updateBook = async (req, res) => {
       { new: true }
     );
 
+    if (updatedBook) {
+      console.log("true");
+      res.status(200).json({
+        status: "success",
+        message: "The book is updated!!",
+        data: { updatedBook },
+      });
+    } else {
+      console.log("false");
+      res.status(200).json({
+        status: "info",
+        message: "This book is not yours.So You can't update it!!",
+      });
+    }
     // const updatedBook = await bookModel
     //   .findById(req.params.id)
     //   .where({ user: req.user.id });
-
-    res.status(200).json({
-      status: "success",
-      data: { updatedBook },
-    });
   } catch (err) {
     res.status(500).json({
       status: "fail",
@@ -58,10 +67,20 @@ export const deleteBook = async (req, res) => {
       owner: req.user.id,
     });
 
-    res.status(200).json({
-      status: "success",
-      data: { deletedBook },
-    });
+    if (deletedBook) {
+      console.log("true");
+      res.status(200).json({
+        status: "success",
+        message: "The book is deleted!!",
+        data: { deletedBook },
+      });
+    } else {
+      console.log("false");
+      res.status(200).json({
+        status: "info",
+        message: "This book is not yours.So You can't delete it!!",
+      });
+    }
   } catch (err) {
     res.status(500).json({
       status: "fail",
@@ -99,14 +118,19 @@ export const findBook = async (req, res) => {
           },
         },
       ]);
+
+      res.status(200).json({
+        status: "success",
+        data: { hereIsYourBookFromYourFav: books[0].hereIsYourBook },
+      });
     } else {
       books = await bookModel.find();
-    }
 
-    res.status(200).json({
-      status: "success",
-      data: { books },
-    });
+      res.status(200).json({
+        status: "success",
+        data: { hereIsYourBookFromAllBook: books },
+      });
+    }
   } catch (err) {
     res.status(500).json({
       status: "fail",
@@ -133,10 +157,11 @@ export const findAllBook = async (req, res) => {
 
 // GET SOME BOOK RECOMMENDATION
 export const bookRecommendation = async (req, res) => {
+  let books;
   try {
     const favUser = await userModel.findById(req.user.id);
 
-    const books = await userModel.aggregate([
+    books = await userModel.aggregate([
       { $match: { _id: favUser._id } },
       {
         $lookup: {
@@ -149,10 +174,19 @@ export const bookRecommendation = async (req, res) => {
       },
     ]);
 
-    res.status(200).json({
-      status: "success",
-      data: { books },
-    });
+    if (books[0].recommendation[0]) {
+      console.log(true);
+      res.status(200).json({
+        status: "success",
+        data: { recommendationFromYourFav: books[0].recommendation },
+      });
+    } else {
+      books = await bookModel.aggregate([{ $sample: { size: 1 } }]);
+      res.status(200).json({
+        status: "success",
+        data: { recommendationFromAllBook: books },
+      });
+    }
   } catch (err) {
     res.status(500).json({
       status: "fail",
@@ -179,6 +213,7 @@ export const favoriteBook = async (req, res) => {
 
       res.status(200).json({
         status: "success",
+        message: "Removed from your favorite!!",
         data: { favBookUnCheked },
       });
     } else {
@@ -190,6 +225,7 @@ export const favoriteBook = async (req, res) => {
 
       res.status(200).json({
         status: "success",
+        message: "Added to your favorite!!",
         data: { favBookCheked },
       });
     }
@@ -203,7 +239,7 @@ export const favoriteBook = async (req, res) => {
 
 export const apiUsageGuide = (req, res) => {
   res.status(200).json({
-    status: "success",
+    status: "Info",
     message0: `You have to use Postman or similar app like it.`,
     message1: {
       API: `/api/auth/register --- TO REGISTER USER.`,
