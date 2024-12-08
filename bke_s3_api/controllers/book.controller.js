@@ -53,13 +53,14 @@ export const updateBook = async (req, res) => {
 // DELETE BOOK
 export const deleteBook = async (req, res) => {
   try {
-    // await bookModel.findByIdAndDelete(req.user.id);
-
-    await bookModel.findById(req.params.id).where({ user: req.user.id });
+    const deletedBook = await bookModel.findOneAndDelete({
+      _id: req.params.id,
+      owner: req.user.id,
+    });
 
     res.status(200).json({
       status: "success",
-      message: "Book has been deleted...",
+      data: { deletedBook },
     });
   } catch (err) {
     res.status(500).json({
@@ -169,7 +170,6 @@ export const favoriteBook = async (req, res) => {
       .findById(req.user.id)
       .where({ myFavorite: favBook._id });
 
-    console.log(favUser);
     if (favUser) {
       const favBookUnCheked = await userModel.findByIdAndUpdate(
         req.user.id,
