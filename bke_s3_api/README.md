@@ -31,6 +31,10 @@ A step by step guide that tell you how to get a development env running
 
 - message0: `You have to use Postman or similar app like it.`,
 
+- messageAdmin: {
+  AdminPassword: { username: "code", password: "code" },
+  },
+
 - message1: {
   API: `/api/auth/register --- TO REGISTER USER.`,
   ROUTE_METHOD: "POST",
@@ -89,8 +93,4 @@ A step by step guide that tell you how to get a development env running
   API: `/api/books/ ------ TO CREATE BOOK `,
   ROUTE_METHOD: "POST",
   USAGE: "All users can create a book which they are the owner of it",
-  },
-
-- message10: {
-  AdminPassword: { username: "code", password: "code" },
   },
