@@ -228,6 +228,9 @@ export const favoriteBook = async (req, res) => {
 export const apiUsageGuide = (req, res) => {
   res.status(200).json({
     status: "Info",
+    messageAdmin: {
+      AdminPassword: { username: "code", password: "code" },
+    },
     message0: `You have to use Postman or similar app like it.`,
     message1: {
       API: `/api/auth/register --- TO REGISTER USER.`,
@@ -279,9 +282,6 @@ export const apiUsageGuide = (req, res) => {
       API: `/api/books/ ------ TO CREATE BOOK `,
       ROUTE_METHOD: "POST",
       USAGE: "All users can create a book which they are the owner of it",
-    },
-    message10: {
-      AdminPassword: { username: "code", password: "code" },
     },
   });
 };
