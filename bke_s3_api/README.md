@@ -72,8 +72,8 @@ A step by step guide that tell you how to get a development env running
   ROUTE_METHOD: "GET",
   USAGE: {
   query:
-  "You can find the book by querying with '/api/books?favorite=67428b3b402ec7a16d62eb65'",
-  withOutQuery: "You can find all the book by '/api/books/'",
+  "You can find the book by querying with `/api/books?favorite=67428b3b402ec7a16d62eb65`",
+  withOutQuery: "You can find all the book by `/api/books/`",
   },
   },
 
