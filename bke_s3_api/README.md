@@ -1,6 +1,6 @@
 # Project Title
 
-This api is stage-3 project. this api is Advanced API with Authentication and Role-Based Access Control (RBAC).
+This api is a stage-3 project. It has Advanced API with Authentication and Role-Based Access Control (RBAC).
 Here it is (https://backend-s3.onrender.com/)
 
 # Getting Started
