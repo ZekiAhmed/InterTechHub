@@ -1,0 +1,28 @@
+{
+  "name": "bke_s4s5_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Zeki Ahmed",
+  "license": "ISC",
+  "description": "Graduate students Exit examp preparation platform",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "chapa-nodejs": "^2.0.1",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.3",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "nodemon": "^3.1.9"
+  }
+}
