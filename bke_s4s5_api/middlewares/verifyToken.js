@@ -1,24 +1,38 @@
 import jwt from "jsonwebtoken";
+import { User } from "../models/User.js";
 
-export const verifyToken = (req, res, next) => {
-  const token = req.headers.token;
-  if (token) {
-    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
-      if (err) res.status(403).json("Token is not valid!");
-      req.user = user;
-      next();
+export const isAuth = async (req, res, next) => {
+  try {
+    const token = req.headers.token;
+
+    if (!token)
+      return res.status(403).json({
+        message: "Please Login",
+      });
+
+    const decodedData = jwt.verify(token, process.env.JWT_SEC);
+
+    req.user = await User.findById(decodedData._id);
+
+    next();
+  } catch (error) {
+    res.status(500).json({
+      message: "Login First",
     });
-  } else {
-    return res.status(401).json("You are not authenticated! Login first!");
   }
 };
 
-export const verifyTokenAndAdmin = (req, res, next) => {
-  verifyToken(req, res, () => {
-    if (req.user.isAdmin) {
-      next();
-    } else {
-      res.status(403).json("You are not alowed to do that be an Admin!");
-    }
-  });
+export const isAdmin = (req, res, next) => {
+  try {
+    if (req.user.role !== "admin")
+      return res.status(403).json({
+        message: "You are not admin",
+      });
+
+    next();
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 };

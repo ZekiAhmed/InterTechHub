@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "Zeki Ahmed",
   "license": "ISC",
-  "description": "Graduate students Exit examp preparation platform",
+  "description": "Graduate students Exit exam preparation platform",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "chapa-nodejs": "^2.0.1",

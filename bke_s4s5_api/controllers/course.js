@@ -6,6 +6,7 @@ import { User } from "../models/User.js";
 import Questions from "../models/Question.js";
 import Results from "../models/Result.js";
 import { Payment } from "../models/Payment.js";
+import { Progress } from "../models/Progress.js";
 
 export const getAllCourses = TryCatch(async (req, res) => {
   const courses = await Courses.find();
@@ -113,6 +114,53 @@ export async function dropResult(req, res) {
     res.json({ error });
   }
 }
+
+export const addProgress = TryCatch(async (req, res) => {
+  const { user } = req;
+  const { courseId, lectureId } = req.query;
+
+  let progress = await Progress.findOne({ user: user._id, course: courseId });
+
+  if (!progress) {
+    progress = new Progress({
+      user: user._id,
+      course: courseId,
+      completedLectures: [],
+    });
+  }
+
+  if (progress.completedLectures.includes(lectureId)) {
+    return res.json({ message: "Progress already recorded" });
+  }
+
+  progress.completedLectures.push(lectureId);
+
+  await progress.save();
+
+  res.status(201).json({ message: "New progress added" });
+});
+
+export const getProgress = TryCatch(async (req, res) => {
+  const progress = await Progress.findOne({
+    user: req.user._id,
+    course: req.query.course,
+  });
+
+  if (!progress) return res.status(404).json({ message: "null" });
+
+  const allLectures = (await Lecture.find({ course: req.query.course })).length;
+
+  const completedLectures = progress.completedLectures.length;
+
+  const courseProgressPercentage = (completedLectures * 100) / allLectures;
+
+  res.json({
+    courseProgressPercentage,
+    completedLectures,
+    allLectures,
+    progress,
+  });
+});
 
 let tx_ref;
 
